@@ -8,6 +8,8 @@
    <title>LOGIN</title>
    <!-- Bootstrap -->
    <link rel="stylesheet" href="assets/css/bootstrap.css">
+   <!-- SweetAlert -->
+   <link rel="stylesheet" href="plugins/extensions/sweetalert2/sweetalert2.css">
    <style>
       body {
          background-color: #f2f7ff;
@@ -54,6 +56,7 @@
 
    <!-- Bootstrap JS -->
    <script src="assets/js/bootstrap.bundle.js"></script>
+   <script src="plugins/extensions/sweetalert2/sweetalert2.all.js"></script>
 </body>
 
 </html>
@@ -62,8 +65,26 @@
 require 'config.php';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
    $email = $_POST['email'];
-   $pws = $_POST['pws'];
+   $pws = md5($_POST['pws']);
 
-   echo $email .' | '. $pws;
+   $query = $conn->query("SELECT * FROM user WHERE email = '$email' AND password = '$pws'");
+   $cek_data = mysqli_num_rows($query);
+
+   if ($cek_data > 0) {
+      session_start();
+      $data = mysqli_fetch_assoc($query);
+      $_SESSION['email'] = $data['email'];
+      $_SESSION['nama'] = $data['nama_lengkap'];
+      $_SESSION['level'] = $data['level'];
+      header('Location:admin/index.php');
+   } else {
+      echo "<script>
+         Swal.fire({
+            title: 'ERROR',
+            text: 'E-Mail dan Password yang anda masukkan salah!',
+            icon: 'error'
+         })
+      </script>";
+   }
 }
 ?>
