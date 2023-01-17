@@ -22,8 +22,8 @@ if (!isset($_SESSION['email'])) {
       body {
          background-color: #f2f7ff;
       }
-      
-      .bg-navbar{
+
+      .bg-navbar {
          background-color: #435ebe;
       }
    </style>
@@ -53,13 +53,65 @@ if (!isset($_SESSION['email'])) {
                         <li><a class="dropdown-item" href="kelas/index.php">Kelas</a></li>
                      </ul>
                   </li>
+                  <li class="nav-item">
+                     <a class="nav-link active" aria-current="page" href="mahasiswa/index.php">Mahasiswa</a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link active" aria-current="page" href="nilai/index.php">Nilai</a>
+                  </li>
                </ul>
+               <div class="d-flex">
+                  <div class="dropdown">
+                     <a class="text-white dropdown-toggle nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="../assets/image/avatar/1.jpg" class="rounded-circle" height="25" alt="avatar">
+                        <?= $_SESSION['nama']; ?>
+                     </a>
+
+                     <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Profil</a></li>
+                        <li><a class="dropdown-item" href="#">Setting</a></li>
+                        <li>
+                           <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="../logout.php">Logout</a></li>
+                     </ul>
+                  </div>
+               </div>
             </div>
          </div>
       </nav>
    </header>
 
-   <a href="../logout.php">Logout</a>
+   <div class="container pt-4">
+      <div class="row">
+         <div class="col-12">
+            <div class="card rounded-3 border-0">
+               <div class="card-body">
+                  <div class="breadcrumb mb-0">
+                     <a href="home.php" class="nav-link breadcrumb-item active fw-bold fs-6 text-secondary">
+                        Dashboard
+                     </a>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <footer>
+      <div class="container">
+         <div class="row">
+            <div class="col-12 text-muted">
+               <div class="float-start">
+                  <p>2022 &copy; ELTIBIZ</p>
+               </div>
+               <div class="float-end">
+                  <p>Created by <strong>M. Iqbal Adenan</strong></p>
+               </div>
+            </div>
+         </div>
+      </div>
+   </footer>
 
    <!-- Bootstrap JS -->
    <script src="../assets/js/bootstrap.bundle.js"></script>
