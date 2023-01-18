@@ -2,14 +2,11 @@
 <html lang="en">
 
 <head>
-   <meta charset="UTF-8">
-   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Document</title>
 </head>
 
 <body>
-   <form action="act_create.php" method="post">
+   <form action="proses_add.php" method="post">
       <input type="text" name="kode_jurusan" placeholder="Masukkan kode jurusan">
       <input type="text" name="nama_jurusan" placeholder="Masukkan nama  jurusan">
       <select name="status">
@@ -31,13 +28,25 @@
          </tr>
       </thead>
       <tbody>
-         <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-         </tr>
+         <?php
+         require_once '../../config.php';
+         $no = 1;
+         $query = $conn->query("SELECT * FROM jurusan");
+         foreach ($query as $data) :
+         ?>
+            <tr>
+               <td><?= $no++ ?></td>
+               <td><?= $data['kode_jurusan'] ?></td>
+               <td><?= $data['nama_jurusan'] ?></td>
+               <td><?= $data['status'] ?></td>
+               <td>
+                  <a href="edit.php?id=<?= $data['id_jur'] ?>">Edit</a>
+                  <a href="proses_delete.php?id=<?= $data['id_jur'] ?>">Hapus</a>
+               </td>
+            </tr>
+         <?php
+         endforeach
+         ?>
       </tbody>
    </table>
 </body>
